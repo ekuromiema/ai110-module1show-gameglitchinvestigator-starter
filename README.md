@@ -25,28 +25,33 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+- The app picks a secret number, the player submits guesses, and the game responds with feedback (whether to guess higher or lower) and tracks score
+- **Bug 1:** Enter key didn't submit the guess; submitting felt like it took two steps.
+Typing a guess and pressing Enter would commit the text input and trigger a rerun, but it would not trigger the separate Submit Guess button. As a result, the guess wasn't processed until the button was clicked separately. **FIX:** Wrapped the text input and submit button inside an st.form, using st.form_submit_button instead of a st.button. Inside a form, pressing Enter in a text input automatically triggers the form's submit button, so Enter and clicking now behave identically and the guess is processed in a single step. 
+- **Bug 2:** Higher/lower feedback was reversed. When guessing above the secret number, the game would say "Go higher" instead of "Go lower" **FIX:** Corrected the outcome-to-message mapping so "higher" and "lower" feedback matches the actual comparison result. Also removed the code that alternated comparing the secret number as a string versus a number based on whether the attempt count was even or odd, so the secret is now consistently compared as a number on every attempt.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
-
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+1. User enters a guess of 40 and presses Enter
+2. Game returns "Too Low" and guess is logged
+3. User enters a guess of 70 → "Too High"
+4. Score updates correctly after each guess
+5. Game ends after the correct guess
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+================================================================== test session starts ==================================================================
+platform win32 -- Python 3.13.13, pytest-9.0.3, pluggy-1.6.0
+rootdir: C:\Users\Owner\ai110-module1show-gameglitchinvestigator-starter
+plugins: anyio-4.13.0
+collected 3 items                                                                                                                                        
+
+tests\test_game_logic.py ...                                                                                                                       [100%]
+
+=================================================================== 3 passed in 0.10s ===================================================================
 ```
 
 ## 🚀 Stretch Features
