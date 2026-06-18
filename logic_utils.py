@@ -43,7 +43,7 @@ def check_guess(guess, secret):
 
     # FIX: The original bug was that the hint messages were flipped, 
     # so the player was told to go HIGHER when their guess was too high, 
-    # and LOWER when it was too low. 
+    # and LOWER when it was too low. Just swapped the messages to match the correct hints
     if guess > secret:
         # The guess is bigger than the secret, so the player must go lower.
         return "Too High", "📉 Go LOWER!"
