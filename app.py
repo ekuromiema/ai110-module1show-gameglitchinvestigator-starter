@@ -62,12 +62,15 @@ with st.expander("Developer Debug Info"):
     st.write("Difficulty:", difficulty)
     st.write("History:", st.session_state.history)
 
-# Submit Button bug fixed here
+# 
 with st.form(key=f"guess_form_{difficulty}"):
     raw_guess = st.text_input(
         "Enter your guess:",
         key=f"guess_input_{difficulty}"
     )
+    # FIX: The original bug was that the form submit button was outside the form, 
+    # so it didn't trigger form submission. Moved it inside the form to make sure
+    # when the user clicks "Submit Guess", the form is submitted and the guess is processed.
     submit = st.form_submit_button("Submit Guess 🚀")
 
 col1, col2 = st.columns(2)
